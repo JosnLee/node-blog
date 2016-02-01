@@ -1,4 +1,24 @@
-angular.module('nodeBlog', ['ui.bootstrap']);
+angular.module('nodeBlog', ['ui.bootstrap','ui.router']).config(function($stateProvider, $urlRouterProvider) {
+    //
+    // For any unmatched url, redirect to /state1
+    //
+    // Now set up the states
+    $stateProvider
+        .state('home', {
+            url: "/home",
+            templateUrl: "index.html",
+            views: {
+                "container": {templateUrl: "/tpls/topiclist.html"}
+            }
+        })
+        .state('admin', {
+            url: "/admin",
+            views: {
+                "container": {templateUrl: "admin.html"}
+            }
+        })
+
+});
 angular.module('nodeBlog').controller('frameCtrl', ['$scope','$http', function ($scope,$http) {
     $scope.userSubmit = function () {
         $http.post('/reg',{name:$scope.name,password:$scope.password}).then(function(res){
@@ -59,4 +79,4 @@ angular.module('nodeBlog').controller('frameCtrl', ['$scope','$http', function (
 
         return array;
     }
-}]);
+}])
