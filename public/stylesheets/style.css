@@ -1,8 +1,31 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: #f9f9f9;
+  text-shadow: 0 1px 2px rgba(0,0,0,.3);
+  filter: alpha(opacity=50);
 }
 
 a {
-  color: #00B7FF;
+  color: dimgrey;
+}
+
+.ns-article {
+  background: #fff;
+  padding: 2px 10px 10px 10px;
+  margin-top: 10px;
+  box-shadow: 1px 1px 1px rgba(229,229,229,.3);
+}
+.content{
+  margin-bottom: 50px;
+}
+.bs-docs-featurette+.bs-docs-footer {
+  margin-top: 0;
+  border-top: 0;
+}
+.bs-docs-footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 100px;
+  color: #767676;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
 }
