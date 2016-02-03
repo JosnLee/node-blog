@@ -1,4 +1,4 @@
-angular.module('nodeBlog', ['ui.bootstrap','ui.router']).config(function($stateProvider, $urlRouterProvider) {
+angular.module('nodeBlog', ['ui.bootstrap', 'ui.router']).config(function ($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1
     $urlRouterProvider.otherwise("/home");
@@ -19,10 +19,10 @@ angular.module('nodeBlog', ['ui.bootstrap','ui.router']).config(function($stateP
         })
 
 });
-angular.module('nodeBlog').controller('frameCtrl', ['$scope','$http', function ($scope,$http) {
+angular.module('nodeBlog').controller('frameCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.userSubmit = function () {
-        $http.post('/reg',{name:$scope.name,password:$scope.password}).then(function(res){
-            console.log(res,"llllllll")
+        $http.post('/reg', {name: $scope.name, password: $scope.password}).then(function (res) {
+            console.log(res, "llllllll")
         })
     }
     $scope.myInterval = 5000;
@@ -30,16 +30,16 @@ angular.module('nodeBlog').controller('frameCtrl', ['$scope','$http', function (
     var slides = $scope.slides = [];
     var currIndex = 0;
 
-    $scope.addSlide = function() {
+    $scope.addSlide = function () {
         var newWidth = 600 + slides.length + 1;
         slides.push({
             image: '//lorempixel.com/' + newWidth + '/300',
-            text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
+            text: ['Nice image', 'Awesome photograph', 'That is so cool', 'I love that'][slides.length % 4],
             id: currIndex++
         });
     };
 
-    $scope.randomize = function() {
+    $scope.randomize = function () {
         var indexes = generateIndexesArray();
         assignNewIndexesToSlides(indexes);
     };
@@ -78,5 +78,13 @@ angular.module('nodeBlog').controller('frameCtrl', ['$scope','$http', function (
         }
 
         return array;
+    }
+}]).controller('adminController', ['$scope','$sce',function ($scope,$sce) {
+    var converter = new showdown.Converter();
+
+    $scope.textChange = function () {
+        $scope.html =$sce.trustAsHtml(converter.makeHtml($scope.text));
+        console.log()
+
     }
 }])
