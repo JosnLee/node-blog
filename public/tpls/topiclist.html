@@ -1,58 +1,113 @@
-<div>
-    <article class="article ns-article" >
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse"><span
+                    class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span></button>
+            <a href="Index.html" class="navbar-brand">首页</a></div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                <li><a href="getting-started.html">起步</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="components.html">组件</a></li>
+                <li><a href="javascript.html">JavaScript插件</a></li>
+                <li><a href="customize.html">定制</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="about.html">关于</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div  style="margin-top: 50px" >
+    <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
+        <uib-slide ng-repeat="slide in slides" active="slide.active" index="slide.id">
+            <img ng-src="{{slide.image}}" style="margin:auto;">
 
-        <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a><span class="glyphicon glyphicon-fire"></span></h3>
-        <label>
-            <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
-            <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
-            <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
-        </label>
-        <a   style="float:right;">查看更多</a>
+            <div class="carousel-caption">
+                <h4>Slide {{slide.id}}</h4>
 
+                <p>{{slide.text}}</p>
+            </div>
+        </uib-slide>
+    </uib-carousel>
+</div>
+<div class="container content">
+    <div  class="topic" style="width: 76%;float: left">
+        <div>
+            <article class="article ns-article" >
 
-    </article><article class="article ns-article">
-
-    <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a></h3>
-    <label>
-        <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
-        <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
-        <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
-    </label>
-    <a   style="float:right;">查看更多</a>
-
-
-</article><article class="article ns-article">
-
-    <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a></h3>
-    <label>
-        <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
-        <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
-        <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
-    </label>
-    <a   style="float:right;">查看更多</a>
-
-
-</article><article class="article ns-article">
-
-    <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a></h3>
-    <label>
-        <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
-        <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
-        <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
-    </label>
-    <a   style="float:right;">查看更多</a>
-
-
-</article><article class="article ns-article">
-
-    <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a></h3>
-    <label>
-        <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
-        <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
-        <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
-    </label>
-    <a   style="float:right;">查看更多</a>
+                <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a><span class="glyphicon glyphicon-fire"></span></h3>
+                <label>
+                    <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
+                    <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
+                    <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
+                </label>
+                <a   style="float:right;">查看更多</a>
 
 
-</article>
+            </article><article class="article ns-article">
+
+            <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a></h3>
+            <label>
+                <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
+                <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
+                <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
+            </label>
+            <a   style="float:right;">查看更多</a>
+
+
+        </article><article class="article ns-article">
+
+            <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a></h3>
+            <label>
+                <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
+                <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
+                <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
+            </label>
+            <a   style="float:right;">查看更多</a>
+
+
+        </article><article class="article ns-article">
+
+            <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a></h3>
+            <label>
+                <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
+                <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
+                <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
+            </label>
+            <a   style="float:right;">查看更多</a>
+
+
+        </article><article class="article ns-article">
+
+            <h3 class="uk-article-title ns-fonts"><a href="http://yijiebuyi.com/blog/49aa7d3793aeafeb77da67a4159ec1aa.html">centOS6.5 快速安装部署 gitLab</a></h3>
+            <label>
+                <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
+                <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
+                <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
+            </label>
+            <a   style="float:right;">查看更多</a>
+
+
+        </article>
+        </div>
+
+    </div>
+    <div style="width: 22%;float: right;height: 250px;background-color: white;margin-top: 10px" >
+
+    </div>
+    <div style="width: 22%;float: right;height: 250px;background-color: white;margin-top: 10px" >
+        <span></span>
+        <span>nininnihh</span>
+        <span>nininnihh</span>
+        <span>nininnihh</span>
+        <span>nininnihh</span>
+        <span>nininnihh</span>
+        <span>nininnihh</span>
+        <span>nininnihh</span>
+        <span>nininnihh</span>
+    </div>
+
+
 </div>

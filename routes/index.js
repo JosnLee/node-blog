@@ -22,5 +22,7 @@ router.post('/api/topic/create',function(req,res){
   console.log(req,"kckkckkak")
   Topic.topicSave(req.body,res);
 })
-module.exports = router;
+router.post('/api/topic/list',function(req,res){
+  Topic.topicList(req.body,res);
+})
 module.exports = router;

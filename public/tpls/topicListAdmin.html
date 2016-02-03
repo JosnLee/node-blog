@@ -1,0 +1,21 @@
+<div ng-controller="topicAdminController">
+    <div ng-include="'admin.html'"></div>
+
+    <table style="width: 100%">
+        <th>
+        <tr>
+            <td>标题</td>
+            <td>创建者</td>
+            <td>创建时间</td>
+        </tr>
+
+        </th>
+        <tbody>
+        <tr ng-repeat="topic in topics">
+            <td>{{topic.title}}</td>
+            <td>创建者</td>
+            <td>{{topic.updateDate}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,7 +1,23 @@
 <div ng-controller="adminController">
-    <div>管理员页面</div>
+    <header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse"><span
+                        class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span></button>
+                <a href="Index.html" class="navbar-brand">首页</a></div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+                <ul class="nav navbar-nav">
+                    <li><a ui-sref="admin">写文章</a></li>
+                    <li><a ui-sref="topiclist" ng-click="getTopic()">博文列表</a></li>
+                    <li><a href="components.html">标签管理</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="about.html">关于</a></li>
 
-
-    <textarea ng-model="text" ng-change="textChange()">这里写makdon</textarea>
-    <div ng-bind-html="html"></div>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div ui-view="container"></div>
 </div>

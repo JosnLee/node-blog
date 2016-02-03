@@ -6,7 +6,6 @@ angular.module('nodeBlog', ['ui.bootstrap', 'ui.router']).config(function ($stat
     $stateProvider
         .state('home', {
             url: "/home",
-            templateUrl: "index.html",
             views: {
                 "container": {templateUrl: "/tpls/topiclist.html"}
             }
@@ -14,7 +13,12 @@ angular.module('nodeBlog', ['ui.bootstrap', 'ui.router']).config(function ($stat
         .state('admin', {
             url: "/admin",
             views: {
-                "container": {templateUrl: "admin.html"}
+                "container": {templateUrl: "/tpls/topicManage.html"}
+            }
+        }).state('topiclist', {
+            url: "/topiclist",
+            views: {
+                "container": {templateUrl: "/tpls/topicListAdmin.html"}
             }
         })
 
@@ -79,12 +83,33 @@ angular.module('nodeBlog').controller('frameCtrl', ['$scope', '$http', function 
 
         return array;
     }
-}]).controller('adminController', ['$scope','$sce',function ($scope,$sce) {
+}]).controller('adminController', ['$scope','$sce','$http',function ($scope,$sce,$http) {
     var converter = new showdown.Converter();
 
     $scope.textChange = function () {
-        $scope.html =$sce.trustAsHtml(converter.makeHtml($scope.text));
-        console.log()
+        $scope.html =$sce.trustAsHtml(converter.makeHtml($scope.topic.content));
 
     }
+
+    $scope.saveTopic=function(){
+        $http.post('api/topic/create',$scope.topic).then(function(res){
+            console.log(res);
+        })
+    }
+    $scope.getTopic=function(){
+        $http.post('api/topic/list',{}).then(function(res){
+            $scope.topics=res.data;
+        })
+    }
+
+
+}]).controller('topicAdminController', ['$scope','$sce','$http',function ($scope,$sce,$http) {
+
+    $scope.getTopic=function(){
+        $http.post('api/topic/list',{}).then(function(res){
+            $scope.topics=res.data;
+        })
+    }
+    $scope.getTopic();
+
 }])

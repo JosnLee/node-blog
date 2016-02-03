@@ -7,4 +7,5 @@ router.post('api/topic/create',function(req,res){
     console.log(req)
     Topic.topicSave(req.body,res);
 })
+
 module.exports = router;

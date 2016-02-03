@@ -7,6 +7,7 @@ var topicSchema=new Schema({
     content:String,
     tagName:String,
     tagId:String,
+    creator:String,
     updateDate:Date
 });
 
