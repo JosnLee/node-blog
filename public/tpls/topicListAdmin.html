@@ -1,20 +1,20 @@
-<div ng-controller="topicAdminController">
+<div ng-controller="topicAdminController" class="container">
     <div ng-include="'admin.html'"></div>
 
-    <table style="width: 100%">
+    <table style="width: 100%;">
         <th>
         <tr>
             <td>标题</td>
-            <td>创建者</td>
             <td>创建时间</td>
+            <td>操作</td>
         </tr>
 
         </th>
         <tbody>
-        <tr ng-repeat="topic in topics">
+        <tr ng-repeat="topic in topics" style="height: 40px;">
             <td>{{topic.title}}</td>
-            <td>创建者</td>
             <td>{{topic.updateDate}}</td>
+            <td><button class="btn-primary btn" ui-sref="admin({topicId:topic._id})">编辑</button></td>
         </tr>
         </tbody>
     </table>

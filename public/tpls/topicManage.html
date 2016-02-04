@@ -1,15 +1,16 @@
+<div ng-controller="topicCreateController">
+    <div ng-include="'admin.html'"></div>
 
-<div ng-include="'admin.html'"></div>
+    <div style="width: 48%;float: left;">
+        <input type="text" ng-model="topic.title" style="font-size:20px;width: 100%;margin-left:20px;margin-bottom: 10px;height: 30px; border:0px silver solid;" placeholder="标题">
+        <textarea placeholder="内容" ng-model="topic.content" ng-change="textChange()" style="width: 100%;margin-left:20px;border:0px silver solid;min-height: 1000px">这里写makdon</textarea>
 
-<div style="width: 48%;float: left;">
-    <input type="text" ng-model="topic.title" style="font-size:20px;width: 100%;margin-left:20px;margin-bottom: 10px;height: 30px; border:0px silver solid;" placeholder="标题">
-    <textarea placeholder="内容" ng-model="topic.content" ng-change="textChange()" style="width: 100%;margin-left:20px;border:0px silver solid;min-height: 1000px">这里写makdon</textarea>
+    </div>
+    <div style="width: 48%;float: left;margin-left: 40px;">
+        <div style="font-size:20px;text-align:left;width: 100%;margin-left:20px;;margin-bottom: 10px;height: 30px; border:0px silver solid;"><button class="btn-primary btn"  ng-click="saveTopic()">保存</button></div>
 
+        <div ng-bind-html="html" style="width: 100%;"></div>
+    </div>
+
+    <div style="clear: both"></div>
 </div>
-<div style="width: 48%;float: left;margin-left: 40px;">
-    <div style="font-size:20px;text-align:left;width: 100%;margin-left:20px;;margin-bottom: 10px;height: 30px; border:0px silver solid;"><button class="btn-primary btn"  ng-click="saveTopic()">保存</button></div>
-
-    <div ng-bind-html="html" style="width: 100%;"></div>
-</div>
-
-<div style="clear: both"></div>

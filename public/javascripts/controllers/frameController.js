@@ -11,7 +11,7 @@ angular.module('nodeBlog', ['ui.bootstrap', 'ui.router']).config(function ($stat
             }
         })
         .state('admin', {
-            url: "/admin",
+            url: "/admin?topicId",
             views: {
                 "container": {templateUrl: "/tpls/topicManage.html"}
             }
@@ -83,7 +83,12 @@ angular.module('nodeBlog').controller('frameCtrl', ['$scope', '$http', function 
 
         return array;
     }
-}]).controller('adminController', ['$scope','$sce','$http',function ($scope,$sce,$http) {
+}]).controller('adminController', ['$scope','$sce','$http','$state',function ($scope,$sce,$http,$state) {
+
+
+
+}]).controller('topicCreateController', ['$scope','$sce','$http','$state',function ($scope,$sce,$http,$state) {
+    var topicId=$state.params.topicId;
     var converter = new showdown.Converter();
 
     $scope.textChange = function () {
@@ -97,10 +102,12 @@ angular.module('nodeBlog').controller('frameCtrl', ['$scope', '$http', function 
         })
     }
     $scope.getTopic=function(){
-        $http.post('api/topic/list',{}).then(function(res){
-            $scope.topics=res.data;
+        $http.post('api/topic/list',{_id:topicId}).then(function(res){
+            $scope.topic=res.data[0];
+            $scope.textChange();
         })
     }
+    $scope.getTopic();
 
 
 }]).controller('topicAdminController', ['$scope','$sce','$http',function ($scope,$sce,$http) {
