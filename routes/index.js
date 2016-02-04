@@ -1,6 +1,7 @@
 var express = require('express');
 var User = require('../method/user');
 var Topic = require('../method/topic');
+var Tag = require('../method/tag');
 
 
 var router = express.Router();
@@ -19,10 +20,18 @@ router.post('/api/login', function (req, res) {
 });
 
 router.post('/api/topic/create',function(req,res){
-  console.log(req,"kckkckkak")
   Topic.topicSave(req.body,res);
 })
 router.post('/api/topic/list',function(req,res){
   Topic.topicList(req.body,res);
+})
+router.post('/api/tag/create',function(req,res){
+  Tag.tagSave(req.body,res);
+})
+router.post('/api/tag/list',function(req,res){
+  Tag.tagList(req.body,res);
+})
+router.post('/api/tag/delete',function(req,res){
+  Tag.tagDelete(req.body,res);
 })
 module.exports = router;

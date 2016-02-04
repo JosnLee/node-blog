@@ -1,0 +1,33 @@
+<div ng-include="'admin.html'"></div>
+<div ng-controller="tagController" class="container">
+
+   <div style="text-align: left"><input type="text" ng-model="tag.title"><button class="btn-primary btn" ng-click="saveTag()">创建</button></div>
+    <table style="width: 100%;">
+        <th>
+            <tr>
+                <td>标题</td>
+                <td>创建时间</td>
+                <td style="width: 300px;text-align: right"></td>
+            </tr>
+
+        </th>
+        <tbody>
+        <tr ng-repeat="tag in tags" style="height: 40px;">
+            <td>{{tag.title}}</td>
+            <td>{{tag.updateDate|date:'yyyy-MM-dd HH:mm'}}</td>
+            <td style="text-align: right"><input type="text" ng-model="tag.title" ng-show="tag.show"><button class="btn-primary btn" ng-show="tag.show" ng-click="saveTag(tag)">保存</button>
+                <div class="btn-group" uib-dropdown is-open="status.isopen" ng-show="!tag.show">
+                    <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                        操作 <span class="caret"></span>
+                    </button>
+                    <ul uib-dropdown-menu role="menu" aria-labelledby="single-button" style="min-width: inherit">
+                        <li role="menuitem"><a  ng-click="tag.show=true">编辑</a></li>
+                        <li role="menuitem"><a  ng-click="deleteTag(tag)">删除</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
