@@ -5,8 +5,7 @@ var topicSchema=new Schema({
     title: String,
     viewCount: Number,
     content:String,
-    tagName:String,
-    tagId:String,
+    tagObj:[],
     creator:String,
     updateDate:Date
 });
