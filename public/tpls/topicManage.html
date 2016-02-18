@@ -2,12 +2,23 @@
     <div ng-include="'admin.html'"></div>
 
     <div style="width: 48%;float: left;">
-        <input type="text" ng-model="topic.title" style="font-size:20px;width: 100%;margin-left:20px;margin-bottom: 10px;height: 30px; border:0px silver solid;" placeholder="标题">
-        <textarea placeholder="内容" ng-model="topic.content" ng-change="textChange()" style="width: 100%;margin-left:20px;border:0px silver solid;min-height: 1000px">这里写makdon</textarea>
+        <input type="text" ng-model="topic.title"
+               style="font-size:20px;width: 50%;margin-left:20px;margin-bottom: 10px;height: 30px; border:0px silver solid;float: left"
+               placeholder="标题">
+        <ui-select multiple ng-model="topic.tagsSelect" theme="select2" ng-disabled="disabled" style="width: 40%;float: left">
+            <ui-select-match placeholder="分类标签">{{$item.title}}</ui-select-match>
+            <ui-select-choices repeat="tag in tags | filter:$select.search">
+                {{tag.title}}
+            </ui-select-choices>
+        </ui-select>
+        <textarea placeholder="内容" ng-model="topic.content" ng-change="textChange()"
+                  style="width: 100%;margin-left:20px;border:0px silver solid;min-height: 1000px">这里写makdon</textarea>
 
     </div>
     <div style="width: 48%;float: left;margin-left: 40px;">
-        <div style="font-size:20px;text-align:left;width: 100%;margin-left:20px;;margin-bottom: 10px;height: 30px; border:0px silver solid;"><button class="btn-primary btn"  ng-click="saveTopic()">保存</button></div>
+        <div style="font-size:20px;text-align:left;width: 100%;margin-left:20px;;margin-bottom: 10px;height: 30px; border:0px silver solid;">
+            <button class="btn-primary btn" ng-click="saveTopic()">保存</button>
+        </div>
 
         <div ng-bind-html="html" style="width: 100%;"></div>
     </div>

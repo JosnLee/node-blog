@@ -1,4 +1,4 @@
-angular.module('nodeBlog', ['ui.bootstrap', 'ui.router']).config(function ($stateProvider, $urlRouterProvider) {
+angular.module('nodeBlog', ['ui.bootstrap', 'ui.router', 'ui.select', 'ngSanitize']).config(function ($stateProvider, $urlRouterProvider) {
     //
     // For any unmatched url, redirect to /state1
     $urlRouterProvider.otherwise("/home");
@@ -32,7 +32,48 @@ angular.module('nodeBlog', ['ui.bootstrap', 'ui.router']).config(function ($stat
             }
         })
 
-});
+}).factory('topicMange', ['$http', '$q', function ($http, $q) {
+    var topicMange = {
+        /**
+         * 获取topic的列表
+         * parames {_id:id}
+         * @returns {*}
+         */
+        getTopic: function (params) {
+            return $http.post('/api/topic/list', params).then(function (result) {
+                return result.data;
+            });
+        },
+        deleteTopic: function (params) {
+            return $http.post('/api/topic/delete', params).then(function (result) {
+                return result.data;
+            });
+        },
+        createTopic: function (params) {
+            return $http.post('/api/topic/create', params).then(function (result) {
+                return result.data;
+            });
+        },
+        getTag:function(params){
+            return $http.post('/api/tag/list', params).then(function (result) {
+                return result.data;
+            });
+        },
+        createTag:function(params){
+            return $http.post('/api/tag/create', params).then(function (result) {
+                return result.data;
+            });
+        },
+        deleteTag:function(params){
+            return $http.post('/api/tag/delete', params).then(function (result) {
+                return result.data;
+            });
+        },
+    }
+
+
+    return topicMange;
+}]);
 angular.module('nodeBlog').controller('frameCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.userSubmit = function () {
         $http.post('/reg', {name: $scope.name, password: $scope.password}).then(function (res) {
@@ -96,16 +137,12 @@ angular.module('nodeBlog').controller('frameCtrl', ['$scope', '$http', function 
 }]).controller('adminController', ['$scope', '$sce', '$http', '$state', function ($scope, $sce, $http, $state) {
 
 
-}]).controller('topicController', ['$scope', '$sce', '$http', '$state', function ($scope, $sce, $http, $state) {
+}]).controller('topicController', ['$scope', '$sce', '$http', 'topicMange', function ($scope, $sce, $http, topicMange) {
+    topicMange.getTopic({}).then(function (res) {
+        $scope.topics = res;
+    })
 
-    $scope.getTopic = function () {
-        $http.post('api/topic/list', {}).then(function (res) {
-            $scope.topics = res.data;
-        })
-    }
-    $scope.getTopic();
-
-}]).controller('topicDetailController', ['$scope', '$sce', '$http', '$state', function ($scope, $sce, $http, $state) {
+}]).controller('topicDetailController', ['$scope', '$sce', '$http', '$state', 'topicMange', function ($scope, $sce, $http, $state, topicMange) {
     var topicId = $state.params.topicId;
     var converter = new showdown.Converter();
 
@@ -113,68 +150,65 @@ angular.module('nodeBlog').controller('frameCtrl', ['$scope', '$http', function 
         $scope.html = $sce.trustAsHtml(converter.makeHtml($scope.topic.content));
 
     }
-    $scope.getTopic = function () {
-        $http.post('api/topic/list', {_id: topicId}).then(function (res) {
-            $scope.topic = res.data[0];
+    topicMange.getTopic({_id: topicId}).then(function (res) {
+        $scope.topic = res[0];
+        $scope.textChange();
+    })
+
+}]).controller('topicCreateController', ['$scope', '$sce', '$http', '$state', 'topicMange', function ($scope, $sce, $http, $state, topicMange) {
+    $scope.topic = {tagsSelect: []}
+    var topicId = $state.params.topicId;
+    var converter = new showdown.Converter();
+    $scope.textChange = function () {
+        $scope.html = $sce.trustAsHtml(converter.makeHtml($scope.topic.content));
+
+    }
+    topicMange.getTag({}).then(function(res){
+        $scope.tags = res;
+    })
+
+    $scope.saveTopic = function () {
+        topicMange.createTopic($scope.topic).then(function (res) {
+            $state.go('topiclist')
+        })
+
+    }
+
+    if (topicId) {
+        topicMange.getTopic({_id: topicId}).then(function (res) {
+            $scope.topic = res[0];
             $scope.textChange();
         })
     }
-    $scope.getTopic();
 
-}]).controller('topicCreateController', ['$scope', '$sce', '$http', '$state', function ($scope, $sce, $http, $state) {
-    var topicId = $state.params.topicId;
-    var converter = new showdown.Converter();
-    $scope.textChange = function () {
-        $scope.html = $sce.trustAsHtml(converter.makeHtml($scope.topic.content));
 
-    }
-
-    $scope.saveTopic = function () {
-        console.log($scope.topic)
-        $http.post('api/topic/create', $scope.topic).then(function (res) {
-            console.log(res);
+}]).controller('topicAdminController', ['$scope', '$sce', 'topicMange','$state', function ($scope, $sce, topicMange,$state) {
+    topicMange.getTopic({}).then(function (res) {
+        $scope.topics = res;
+    })
+    $scope.deleteTopic=function(topic){
+        topicMange.deleteTopic(topic).then(function(res){
+            $state.reload();
         })
     }
-    $scope.getTopic = function (id) {
-        if (id)
-            $http.post('api/topic/list', {_id: id}).then(function (res) {
-                $scope.topic = res.data[0];
-                $scope.textChange();
-            })
-    }
-    if (topicId) {
-        $scope.getTopic(topicId);
 
-    }
-
-
-}]).controller('topicAdminController', ['$scope', '$sce', '$http', function ($scope, $sce, $http) {
-
-    $scope.getTopic = function () {
-        $http.post('api/topic/list', {}).then(function (res) {
-            $scope.topics = res.data;
-        })
-    }
-    $scope.getTopic();
-
-}]).controller('tagController', ['$scope', '$sce', '$http','$state',function ($scope, $sce, $http,$state) {
+}]).controller('tagController', ['$scope', '$sce', '$http', '$state','topicMange', function ($scope, $sce, $http, $state,topicMange) {
 
 
     $scope.saveTag = function (tag) {
         delete tag.show
-        $http.post('api/tag/create',tag).then(function (res) {
+        topicMange.createTag(tag).then(function(res){
             $state.reload();
         })
+
     }
-    $scope.getTag = function () {
-        $http.post('api/tag/list', $scope.tag).then(function (res) {
-          $scope.tags=res.data;
+    topicMange.getTag({}).then(function(res){
+        $scope.tags = res;
+    })
+    $scope.deleteTag = function (tag) {
+        topicMange.deleteTag({_id: tag._id}).then(function(res){
+            $state.reload();
         })
+
     }
-    $scope.deleteTag=function(tag){
-        $http.post('api/tag/delete',{_id:tag._id}).then(function(res){
-            console.log(res);
-        })
-    }
-    $scope.getTag();
 }])

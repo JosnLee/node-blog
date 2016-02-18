@@ -3,18 +3,30 @@
 
     <table style="width: 100%;">
         <th>
-        <tr>
-            <td>标题</td>
-            <td>创建时间</td>
-            <td>操作</td>
-        </tr>
+            <tr>
+                <td>标题</td>
+                <td>创建时间</td>
+                <td>操作</td>
+            </tr>
 
         </th>
         <tbody>
         <tr ng-repeat="topic in topics" style="height: 40px;">
             <td>{{topic.title}}</td>
             <td>{{topic.updateDate}}</td>
-            <td><button class="btn-primary btn" ui-sref="admin({topicId:topic._id})">编辑</button></td>
+            <td>
+                <div class="btn-group" uib-dropdown is-open="status.isopen">
+
+                    <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle
+                            ng-disabled="disabled">
+                        操作 <span class="caret"></span>
+                    </button>
+                    <ul uib-dropdown-menu role="menu" aria-labelledby="single-button" style="min-width: inherit">
+                        <li role="menuitem"><a ui-sref="admin({topicId:topic._id})">编辑</a></li>
+                        <li role="menuitem"><a ng-click="deleteTopic({_id:topic._id})">删除</a></li>
+                    </ul>
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>

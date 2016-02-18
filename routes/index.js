@@ -25,6 +25,9 @@ router.post('/api/topic/create',function(req,res){
 router.post('/api/topic/list',function(req,res){
   Topic.topicList(req.body,res);
 })
+router.post('/api/topic/delete',function(req,res){
+  Topic.topicDelete(req.body,res);
+})
 router.post('/api/tag/create',function(req,res){
   Tag.tagSave(req.body,res);
 })

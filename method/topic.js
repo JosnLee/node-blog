@@ -35,5 +35,15 @@ exports.topicList=function(params,res){
     })
 
 };
+exports.topicDelete=function(params,res){
+    Topic.remove(params,function(err,doc){
+      if(err){
+          res.json(err)
+      }else{
+          res.json(doc)
+      }
+    })
+
+};
 
 
