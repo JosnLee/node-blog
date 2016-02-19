@@ -23,13 +23,17 @@
                 <label>
                     <span class=""><i class="uk-icon-clock-o"></i> 2016-01-22</span>
                     <span style="padding-left:25px;"><i class="glyphicon glyphicon-eye-open"></i> 59</span>
-                    <span style="padding-left:25px;"><i class="uk-icon-folder-open"></i> <a href="http://yijiebuyi.com/category/开发工具.html" >开发工具</a></span>
+                    <span ng-repeat="tagId in topic.tagIds" style="padding-left:15px;"><i class="glyphicon glyphicon-folder-open" ></i> <a  ui-sref="home({tagId:tagId})">{{tagsMap[tagId]}}</a></span>
                 </label>
                 <a   style="float:right;">查看更多</a>
 
 
             </article>
         </div>
+        <div class="kt-pager-box">
+            <div blog-pager="page"></div>
+        </div>
+        <uib-pagination boundary-links="true" total-items="total" items-per-page="4" ng-change="pageChange(currentPage)" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
 
     </div>
 

@@ -1,0 +1,7 @@
+<ul class="kt-pager-main" ng-if="pageModel.is_shown">
+    <li class="kt-pager-home" ng-click="pageModel.setPage(1)" ng-disabled="pageModel.cur_page<2"><a>{{'first'}}</a></li>
+    <li class="kt-pager-prve" ng-click="pageModel.setPage(pageModel.cur_page-1)"><a> {{'prev'}} </a></li>
+    <li ng-repeat="item in pageModel.page_items" ng-class="{active:item.number==pageModel.cur_page}" ng-click="pageModel.setPage(item.number)"><a> {{item.number}} </a></li>
+    <li class="kt-pager-next" ng-click="pageModel.setPage(pageModel.cur_page+1)"><a> {{'next'}} </a></li>
+    <li class="kt-pager-last" ng-click="pageModel.setPage(pageModel.max_page)" ng-disabled="pageModel.cur_page>=pageModel.max_page"><a>{{'end'}}</a></li>
+</ul>

@@ -5,9 +5,9 @@
         <input type="text" ng-model="topic.title"
                style="font-size:20px;width: 50%;margin-left:20px;margin-bottom: 10px;height: 30px; border:0px silver solid;float: left"
                placeholder="标题">
-        <ui-select multiple ng-model="topic.tagObj" theme="select2" ng-disabled="disabled" style="width: 40%;float: left">
+        <ui-select multiple ng-model="topic.tagIds" theme="select2" ng-disabled="disabled" style="width: 40%;float: left">
             <ui-select-match placeholder="分类标签">{{$item.title}}</ui-select-match>
-            <ui-select-choices repeat="tag in tags | filter:$select.search">
+            <ui-select-choices repeat="tag._id as tag in tags | filter:$select.search">
                 {{tag.title}}
             </ui-select-choices>
         </ui-select>

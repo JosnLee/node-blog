@@ -5,7 +5,7 @@ angular.module('nodeBlog', ['ui.bootstrap', 'ui.router', 'ui.select', 'ngSanitiz
     // Now set up the states
     $stateProvider
         .state('home', {
-            url: "/home",
+            url: "/home?tagId&page&q",
             views: {
                 "container": {templateUrl: "/tpls/topiclist.html"}
             }
@@ -41,6 +41,11 @@ angular.module('nodeBlog', ['ui.bootstrap', 'ui.router', 'ui.select', 'ngSanitiz
          */
         getTopic: function (params) {
             return $http.post('/api/topic/list', params).then(function (result) {
+                return result.data;
+            });
+        },
+        getTopicByPage: function (params) {
+            return $http.post('/api/topic/pagelist', params).then(function (result) {
                 return result.data;
             });
         },
@@ -137,10 +142,31 @@ angular.module('nodeBlog').controller('frameCtrl', ['$scope', '$http', function 
 }]).controller('adminController', ['$scope', '$sce', '$http', '$state', function ($scope, $sce, $http, $state) {
 
 
-}]).controller('topicController', ['$scope', '$sce', '$http', 'topicMange', function ($scope, $sce, $http, topicMange) {
-    topicMange.getTopic({}).then(function (res) {
-        $scope.topics = res;
+}]).controller('topicController', ['$scope', '$sce', '$http', 'topicMange','$state', function ($scope, $sce, $http, topicMange,$state) {
+
+
+    $scope.currentPage=$state.params.page;
+    topicMange.getTopicByPage({page:$scope.currentPage,pageSize:4}).then(function (res) {
+        console.log(res,"kkkkkk")
+        $scope.topics = res.rows;
+        $scope.total=res.total;
     })
+
+    $scope.pageChange=function(){
+        topicMange.getTopicByPage({page:$scope.currentPage,pageSize:4}).then(function (res) {
+            $scope.topics = res.rows;
+            $scope.total=res.total;
+        })
+    }
+    $scope.tagsMap={};
+    topicMange.getTag({}).then(function(res){
+        $scope.tags = res;
+        $scope.tags.forEach(function(tag){
+            $scope.tagsMap[tag._id]=tag.title;
+        })
+    })
+
+
 
 }]).controller('topicDetailController', ['$scope', '$sce', '$http', '$state', 'topicMange', function ($scope, $sce, $http, $state, topicMange) {
     var topicId = $state.params.topicId;
